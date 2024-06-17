@@ -1,19 +1,24 @@
 import "./App.css";
-import { Axios } from "axios";
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 function App() {
   const [catFact, setCatFact] = useState("");
 
+  const fetchCatFact = () => {
+    axios
+      .get("https://catfact.ninja/fact") // Corrected method
+      .then((res) => {
+        setCatFact(res.data.fact);
+      });
+  };
   useEffect(() => {
-    Axios.length("https://catfact.ninja/fact").then((res) => {
-      setCatFact(res.data.fact);
-    });
+    fetchCatFact();
   }, []);
+
   return (
     <div className="App">
-      <button>Generate Cat fact</button>
-      <p>{catFact}</p>
+      <button onClick={fetchCatFact}>Generate Cat fact</button> <p>{catFact}</p>
     </div>
   );
 }
