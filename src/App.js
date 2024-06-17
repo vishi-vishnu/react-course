@@ -1,23 +1,10 @@
 import "./App.css";
 import { useState } from "react";
-import { Task } from "./Task";
+import { Task } from "./task.js";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [newTask, setNewTask] = useState("");
-
-  const handleChange = (event) => {
-    setNewTask(event.target.value);
-  };
-
-  const addTask = () => {
-    const task = {
-      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
-      taskName: newTask,
-      completed: false,
-    };
-    setTodoList(task.taskName !== "" ? [...todoList, task] : todoList);
-  };
 
   const deleteTask = (id) => {
     setTodoList(todoList.filter((task) => task.id !== id));
@@ -37,9 +24,28 @@ function App() {
 
   return (
     <div className="App">
+      <h1>TO-DO APP</h1>
       <div className="addTask">
-        <input onChange={handleChange} />
-        <button onClick={addTask}> Add Task</button>
+        <input
+          onChange={(event) => {
+            setNewTask(event.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            const task = {
+              id:
+                todoList.length === 0
+                  ? 1
+                  : todoList[todoList.length - 1].id + 1,
+              taskName: newTask,
+              completed: false,
+            };
+            setTodoList([...todoList, task]);
+          }}
+        >
+          Add Task
+        </button>
       </div>
       <div className="list">
         {todoList.map((task) => {
