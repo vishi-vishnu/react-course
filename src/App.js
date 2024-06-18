@@ -4,16 +4,14 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [name, setName] = useState("");
-  const [predictAge, setPrdictAge] = useEffect(null);
+  const [predictAge, setPrdictAge] = useState(null);
 
   const fetchData = () => {
     axios.get(`https://api.agify.io/?name=${name}`).then((res) => {
-      setPrdictAge(res.data.age);
+      setPrdictAge(res.data);
     });
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   return (
     <div className="App">
