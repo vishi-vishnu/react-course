@@ -3,7 +3,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [catFact, setCatFact] = useState("");
+  const [name, setName] = useState("");
+  const [predictAge,setPrdictAge]=useEffect(null);
 
   const fetchCatFact = () => {
     axios
