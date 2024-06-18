@@ -8,10 +8,9 @@ function App() {
 
   const fetchData = () => {
     axios.get(`https://api.agify.io/?name=${name}`).then((res) => {
-      setPrdictAge(res.data); 
+      setPrdictAge(res.data);
     });
   };
-
 
   return (
     <div className="App">
