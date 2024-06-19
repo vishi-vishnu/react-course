@@ -10,7 +10,7 @@ function App() {
   const client = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: true,
+        refetchOnWindowFocus: true, // when you go to new window and comeback the fact will be changed by update/fetching that's why its false so it wont update, You can change if you like by "true"...
       },
     },
   });
