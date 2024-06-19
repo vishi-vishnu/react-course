@@ -1,26 +1,26 @@
 import "./App.css";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Profile } from "./pages/Profile";
+import { Contact } from "./pages/Contact";
+import { Navbar } from "./pages/Navbar";
+import { useState,createContext } from "react";
+
+export const AppContext =
 
 function App() {
-  const [catFact, setCatFact] = useState("");
-
-  const fetchCatFact = () => {
-    axios
-      .get("https://catfact.ninja/fact") // Corrected method
-      .then((res) => {
-        setCatFact(res.data.fact);
-      });
-  };
-  useEffect(() => {
-    fetchCatFact();
-  }, []);
-
+  const [username, setUsername] = useState("");
   return (
     <div className="App">
-      <button onClick={fetchCatFact}>Generate Cat fact</button> <p>{catFact}</p>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/Contact" element={<Contact />} />
+          <Route path="*" element={<h1>PAGE NOT FOUND</h1>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
-
-export default App;
