@@ -1,1 +1,3 @@
-export const ChangeProfile = () => {};
+export const ChangeProfile = () => {
+  return <div>ChangeProfile</div>;
+};
