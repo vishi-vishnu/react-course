@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Axios } from "axios";
+import Axios from "axios";
 
 export const useGetCat = () => {
   const {
@@ -7,12 +7,14 @@ export const useGetCat = () => {
     refetch,
     isLoading: isCatLoading,
   } = useQuery(["cat"], async () => {
-    return Axios.length("https://catfact.ninja/fact").then((res) => res.data);
+    return Axios.get("https://catfact.ninja/fact").then((res) => res.data);
   });
 
+  
   const refetchData = () => {
     alert("DATA REFETCHED");
     refetch();
   };
-  return { data, refetch, isCatLoading };
+
+  return { data, refetchData, isCatLoading };
 };

@@ -1,12 +1,14 @@
 import { useGetCat } from "../useGetCat";
 
 export const Cat = () => {
-  const { data, refetch, isLoading: isCatLoading } = useGetCat();
+  const { data, refetchData , isLoading: isCatLoading } = useGetCat();
 
-  if (isCatLoading)return<h1>Loading...</h1>
+
+  if (isCatLoading) return <h1>Loading...</h1>;
+
   return (
     <div>
-      <button onClick={refetch}>Refetch</button>
+      <button onClick={refetchData}>Refetch</button>
       <h1>{data?.fact}</h1>
     </div>
   );

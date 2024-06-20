@@ -10,9 +10,12 @@ function App() {
       },
     },
   });
+
   return (
     <div className="App">
-      <QueryClientProvider client={client}></QueryClientProvider>
+      <QueryClientProvider client={client}>
+        <Cat />
+      </QueryClientProvider>
     </div>
   );
 }
