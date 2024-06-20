@@ -1,12 +1,18 @@
 import "./App.css";
-import { Form } from "./components/Form";
+import { useGetCat } from "./useGetCat";
+import { useQuery } from "@tanstack/react-query";
+import { Axios } from "axios";
 
 function App() {
-  return (
-    <div className="App">
-      <Form />
-    </div>
-  );
+  const useGetCat = () => {
+    const { data, refetch, isLoading: isCatLoading } = useGetCat();
+    return (
+      <div>
+        <button onClick={refetch}>Refetch</button>
+        <h1>{data?.fact}</h1>
+      </div>
+    );
+  };
 }
 
 export default App;
