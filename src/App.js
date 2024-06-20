@@ -1,26 +1,24 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Profile } from "./pages/Profile";
-import { Contact } from "./pages/Contact";
-import { Navbar } from "./pages/Navbar";
-import { useState,createContext } from "react";
-
-export const AppContext =
+import { Cat } from "./components/Cat";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
-  const [username, setUsername] = useState("");
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: true,
+      },
+    },
+  });
+
   return (
     <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="*" element={<h1>PAGE NOT FOUND</h1>} />
-        </Routes>
-      </Router>
+      <QueryClientProvider client={client}>
+        <Cat />
+        {/* The <Cat/> is important */}
+      </QueryClientProvider>
     </div>
   );
 }
+
+export default App;
