@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <QueryClientProvider client={client}>
         <Cat />
+        {/* The <Cat/> is important */}
       </QueryClientProvider>
     </div>
   );
