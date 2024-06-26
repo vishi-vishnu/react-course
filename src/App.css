@@ -60,6 +60,118 @@
   background-color: #d35400;
 }
 
+/* App.css */
+
+/* Form container */
+form {
+  max-width: 400px;
+  width: 100%;
+  margin: 50px auto;
+  padding: 30px;
+  background: #7b68ee;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+/* Title and Description fields */
+.input-container {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: 80%;
+  padding: 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background: #dcd6f7;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Input and Textarea focus effects */
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  background: #f0f8ff;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+/* Textarea specific styling */
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: -10px;
+  text-align: left;
+  margin-left: 10%;
+  width: 80%;
+}
+
+/* Submit button styling */
+.formSubmit {
+  background-color: #dcd6f7;
+  color: #333;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 20px;
+}
+
+/* Submit button hover and active effects */
+.formSubmit:hover {
+  background-color: #c1b8e6;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+.formSubmit:active {
+  transform: translateY(2px);
+}
+
+/* Placeholder styling */
+input[placeholder="Title..."]::placeholder,
+textarea[placeholder="Description..."]::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Enhanced box styling */
+input[type="text"],
+textarea {
+  background: #dcd6f7;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+/* Additional focus effects */
+input[type="text"]:focus,
+textarea:focus {
+  background: #f0f8ff;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
