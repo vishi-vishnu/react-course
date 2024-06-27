@@ -7,40 +7,47 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { Post as IPost } from "./main";
-import { auth, db } from "../../config/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { db, auth } from "../../config/firebase";
+import { Post as IPost } from "./main";
 
-interface props {
+interface Props {
   post: IPost;
 }
 
-interface like {
-  userId: string | undefined;
+interface Like {
+  likeId: string;
+  userId: string;
 }
 
-export const Post = (props: props) => {
+export const Post = (props: Props) => {
   const { post } = props;
   const [user] = useAuthState(auth);
 
-  const [likes, setLikes] = useState<like[] | null>(null);
+  const [likes, setLikes] = useState<Like[] | null>(null);
 
   const likesRef = collection(db, "likes");
 
-  const likeDoc = query(likesRef, where("postId", "==", post.id));
+  const likesDoc = query(likesRef, where("postId", "==", post.id));
 
   const getLikes = async () => {
-    const data = await getDocs(likeDoc);
-    setLikes(data.docs.map((doc) => ({ userId: doc.data().userId })));
+    const data = await getDocs(likesDoc);
+    setLikes(
+      data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id }))
+    );
   };
-
-  const addlike = async () => {
+  const addLike = async () => {
     try {
-      await addDoc(likesRef, { userId: user?.uid, postId: post.id });
+      const newDoc = await addDoc(likesRef, {
+        userId: user?.uid,
+        postId: post.id,
+      });
       if (user) {
         setLikes((prev) =>
-          prev ? [...prev, { userId: user.uid }] : [{ userId: user.uid }]
+          prev
+            ? [...prev, { userId: user.uid, likeId: newDoc.id }]
+            : [{ userId: user.uid, likeId: newDoc.id }]
         );
       }
     } catch (err) {
@@ -53,16 +60,16 @@ export const Post = (props: props) => {
       const likeToDeleteQuery = query(
         likesRef,
         where("postId", "==", post.id),
-        where("userID", "==", user?.uid)
+        where("userId", "==", user?.uid)
       );
 
       const likeToDeleteData = await getDocs(likeToDeleteQuery);
-
-      const likeToDelete = doc(db, "likes", likeToDeleteData.docs[0].id);
+      const likeId = likeToDeleteData.docs[0].id;
+      const likeToDelete = doc(db, "likes", likeId);
       await deleteDoc(likeToDelete);
       if (user) {
-        setLikes((prev) =>
-          prev ? [...prev, { userId: user.uid }] : [{ userId: user.uid }]
+        setLikes(
+          (prev) => prev && prev.filter((like) => like.likeId !== likeId)
         );
       }
     } catch (err) {
@@ -75,20 +82,22 @@ export const Post = (props: props) => {
   useEffect(() => {
     getLikes();
   }, []);
+
   return (
     <div>
       <div className="title">
-        <h1>{post.title}</h1>
+        <h1> {post.title}</h1>
       </div>
       <div className="body">
-        <p>{post.description}</p>
+        <p> {post.description} </p>
       </div>
+
       <div className="footer">
-        <p>@{post.username}</p>
-        <button onClick={hasUserLiked ? removeLike : addlike}>
-          {hasUserLiked ? <>&#128078; </> : <>&#128077;</>}
+        <p> @{post.username} </p>
+        <button onClick={hasUserLiked ? removeLike : addLike}>
+          {hasUserLiked ? <>&#128078;</> : <>&#128077;</>}{" "}
         </button>
-        {likes && <p>Likes:{likes?.length}</p>}
+        {likes && <p> Likes: {likes?.length} </p>}
       </div>
     </div>
   );
