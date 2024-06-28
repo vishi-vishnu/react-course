@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   addDoc,
   getDocs,
@@ -27,9 +28,12 @@ export const Post = (props: Props) => {
 
   const [likes, setLikes] = useState<Like[] | null>(null);
 
-  const likesRef = collection(db, "likes");
-
-  const likesDoc = query(likesRef, where("postId", "==", post.id));
+  // Use useMemo to memoize the collection reference
+  const likesRef = useMemo(() => collection(db, "likes"), [db]);
+  const likesDoc = useMemo(
+    () => query(likesRef, where("postId", "==", post.id)),
+    [likesRef, post.id]
+  );
 
   const getLikes = async () => {
     const data = await getDocs(likesDoc);
@@ -37,6 +41,7 @@ export const Post = (props: Props) => {
       data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id }))
     );
   };
+
   const addLike = async () => {
     try {
       const newDoc = await addDoc(likesRef, {
