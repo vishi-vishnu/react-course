@@ -1,7 +1,14 @@
-.App {
-  text-align: center;
+/* App.css */
+
+/* General Styles */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4f7fc;
+  margin: 0;
+  padding: 0;
 }
 
+/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: flex-end;
@@ -60,9 +67,174 @@
   background-color: #d35400;
 }
 
-/* App.css */
+/* .signin-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  padding: 30px;
+  background: #7b68ee;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
-/* Form container */
+.signin-container .signin-btn{
+  background-color: rgb(145, 145, 187);
+  border: none;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+} */
+
+/* Container for the sign-in box */
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 400px;
+  padding: 30px;
+  margin: auto; /* Centers the container horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  border-radius: 20px;
+  box-shadow: 10px 14px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Button styling */
+.signin-container .signin-btn {
+  background-color: #8e44ad;
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.signin-container .signin-btn:hover {
+  background-color: #732d91;
+}
+
+/* Heading styling */
+.signin-container .signin-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .signin-container {
+    width: 80%;
+  }
+
+  .signin-container .signin-heading {
+    font-size: 16px;
+  }
+
+  .signin-container .signin-btn {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-container {
+    width: 90%;
+  }
+
+  .signin-container .signin-heading {
+    font-size: 14px;
+  }
+
+  .signin-container .signin-btn {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+}
+
+/* end of sign in  */
+
+.signin-container .signin-heading {
+  font-size: 14px;
+}
+
+.signin-container .signin-btn {
+  font-size: 12px;
+  padding: 10px 12px;
+}
+
+/* Post Container Styles */
+.post-container {
+  max-width: 800px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fcf8f8;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #464545;
+}
+
+.post-body {
+  font-size: 19px;
+  color: #4d4b4b;
+  margin-bottom: 20px;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #858181;
+}
+
+.post-footer p {
+  margin: 0;
+}
+
+.post-footer button {
+  background-color: #2544d1;
+  color: #ffffff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.post-footer button:hover {
+  background-color: #1e3a9b;
+  transform: scale(1.05);
+}
+
+/* Form Styles */
 form {
   max-width: 400px;
   width: 100%;
@@ -71,11 +243,10 @@ form {
   background: #7b68ee;
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
 }
 
-/* Title and Description fields */
 .input-container {
   width: 100%;
   text-align: left;
@@ -94,10 +265,9 @@ textarea {
   transition: all 0.3s ease;
   background: #dcd6f7;
   color: #333;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-/* Input and Textarea focus effects */
 input[type="text"]:focus,
 textarea:focus {
   outline: none;
@@ -105,13 +275,11 @@ textarea:focus {
   box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
 }
 
-/* Textarea specific styling */
 textarea {
   resize: vertical;
   height: 100px;
 }
 
-/* Error message styling */
 .error-message {
   color: red;
   font-size: 14px;
@@ -122,7 +290,6 @@ textarea {
   width: 80%;
 }
 
-/* Submit button styling */
 .formSubmit {
   background-color: #dcd6f7;
   color: #333;
@@ -132,11 +299,10 @@ textarea {
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin-top: 20px;
 }
 
-/* Submit button hover and active effects */
 .formSubmit:hover {
   background-color: #c1b8e6;
   box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
@@ -146,14 +312,12 @@ textarea {
   transform: translateY(2px);
 }
 
-/* Placeholder styling */
 input[placeholder="Title..."]::placeholder,
 textarea[placeholder="Description..."]::placeholder {
   color: #999;
   font-style: italic;
 }
 
-/* Enhanced box styling */
 input[type="text"],
 textarea {
   background: #dcd6f7;
@@ -165,12 +329,10 @@ textarea::placeholder {
   font-size: 14px;
 }
 
-/* Additional focus effects */
 input[type="text"]:focus,
 textarea:focus {
   background: #f0f8ff;
 }
-
 
 .App-logo {
   height: 40vmin;

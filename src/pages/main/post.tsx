@@ -25,11 +25,9 @@ interface Like {
 export const Post = (props: Props) => {
   const { post } = props;
   const [user] = useAuthState(auth);
-
   const [likes, setLikes] = useState<Like[] | null>(null);
 
-  // Use useMemo to memoize the collection reference
-  const likesRef = useMemo(() => collection(db, "likes"), [db]);
+  const likesRef = useMemo(() => collection(db, "likes"), []);
   const likesDoc = useMemo(
     () => query(likesRef, where("postId", "==", post.id)),
     [likesRef, post.id]
@@ -67,11 +65,9 @@ export const Post = (props: Props) => {
         where("postId", "==", post.id),
         where("userId", "==", user?.uid)
       );
-
       const likeToDeleteData = await getDocs(likeToDeleteQuery);
       const likeId = likeToDeleteData.docs[0].id;
-      const likeToDelete = doc(db, "likes", likeId);
-      await deleteDoc(likeToDelete);
+      await deleteDoc(doc(db, "likes", likeId));
       if (user) {
         setLikes(
           (prev) => prev && prev.filter((like) => like.likeId !== likeId)
@@ -82,27 +78,26 @@ export const Post = (props: Props) => {
     }
   };
 
-  const hasUserLiked = likes?.find((like) => like.userId === user?.uid);
+  const hasUserLiked = likes?.some((like) => like.userId === user?.uid);
 
   useEffect(() => {
     getLikes();
   }, []);
 
   return (
-    <div>
-      <div className="title">
-        <h1> {post.title}</h1>
+    <div className="post-container">
+      <div className="post-title">
+        <h1>{post.title}</h1>
       </div>
-      <div className="body">
-        <p> {post.description} </p>
+      <div className="post-body">
+        <p>{post.description}</p>
       </div>
-
-      <div className="footer">
-        <p> @{post.username} </p>
+      <div className="post-footer">
+        <p>@{post.username}</p>
         <button onClick={hasUserLiked ? removeLike : addLike}>
-          {hasUserLiked ? <>&#128078;</> : <>&#128077;</>}{" "}
+          {hasUserLiked ? <> &#128078; </> : <> &#128077; </>}
         </button>
-        {likes && <p> Likes: {likes?.length} </p>}
+        {likes && <p>Likes: {likes.length}</p>}
       </div>
     </div>
   );
