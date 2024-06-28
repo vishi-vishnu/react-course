@@ -27,7 +27,7 @@ export const Post = (props: Props) => {
   const [user] = useAuthState(auth);
   const [likes, setLikes] = useState<Like[] | null>(null);
 
-  const likesRef = useMemo(() => collection(db, "likes"), []);
+  const likesRef = useMemo(() => collection(db, "likes"), [db]);
   const likesDoc = useMemo(
     () => query(likesRef, where("postId", "==", post.id)),
     [likesRef, post.id]
