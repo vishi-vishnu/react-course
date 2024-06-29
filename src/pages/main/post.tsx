@@ -27,7 +27,7 @@ export const Post = (props: Props) => {
   const [user] = useAuthState(auth);
   const [likes, setLikes] = useState<Like[] | null>(null);
 
-  const likesRef = useMemo(() => collection(db, "likes"), [db]);
+  const likesRef = useMemo(() => collection(db, "likes"), []);
   const likesDoc = useMemo(
     () => query(likesRef, where("postId", "==", post.id)),
     [likesRef, post.id]
@@ -82,7 +82,7 @@ export const Post = (props: Props) => {
 
   useEffect(() => {
     getLikes();
-  }, []);
+  }, [post.id]); // Ensure getLikes is called when post.id changes
 
   return (
     <div className="post-container">
