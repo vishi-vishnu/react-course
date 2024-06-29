@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   addDoc,
   getDocs,
@@ -8,7 +8,6 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../../config/firebase";
 import { Post as IPost } from "./main";
@@ -25,7 +24,8 @@ interface Like {
 export const Post = (props: Props) => {
   const { post } = props;
   const [user] = useAuthState(auth);
-  const [likes, setLikes] = useState<Like[] | null>(null);
+  const [likes, setLikes] = useState<Like[]>([]);
+  const [hasUserLiked, setHasUserLiked] = useState(false);
 
   const likesRef = useMemo(() => collection(db, "likes"), []);
   const likesDoc = useMemo(
@@ -35,9 +35,12 @@ export const Post = (props: Props) => {
 
   const getLikes = async () => {
     const data = await getDocs(likesDoc);
-    setLikes(
-      data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id }))
-    );
+    const likesData = data.docs.map((doc) => ({
+      userId: doc.data().userId,
+      likeId: doc.id,
+    }));
+    setLikes(likesData);
+    setHasUserLiked(likesData.some((like) => like.userId === user?.uid));
   };
 
   const addLike = async () => {
@@ -46,13 +49,8 @@ export const Post = (props: Props) => {
         userId: user?.uid,
         postId: post.id,
       });
-      if (user) {
-        setLikes((prev) =>
-          prev
-            ? [...prev, { userId: user.uid, likeId: newDoc.id }]
-            : [{ userId: user.uid, likeId: newDoc.id }]
-        );
-      }
+      setLikes((prev) => [...prev, { userId: user?.uid!, likeId: newDoc.id }]);
+      setHasUserLiked(true);
     } catch (err) {
       console.log(err);
     }
@@ -68,21 +66,16 @@ export const Post = (props: Props) => {
       const likeToDeleteData = await getDocs(likeToDeleteQuery);
       const likeId = likeToDeleteData.docs[0].id;
       await deleteDoc(doc(db, "likes", likeId));
-      if (user) {
-        setLikes(
-          (prev) => prev && prev.filter((like) => like.likeId !== likeId)
-        );
-      }
+      setLikes((prev) => prev.filter((like) => like.likeId !== likeId));
+      setHasUserLiked(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const hasUserLiked = likes?.some((like) => like.userId === user?.uid);
-
   useEffect(() => {
     getLikes();
-  }, [post.id]); // Ensure getLikes is called when post.id changes
+  }, [post.id]);
 
   return (
     <div className="post-container">
@@ -97,7 +90,7 @@ export const Post = (props: Props) => {
         <button onClick={hasUserLiked ? removeLike : addLike}>
           {hasUserLiked ? <> &#128078; </> : <> &#128077; </>}
         </button>
-        {likes && <p>Likes: {likes.length}</p>}
+        {likes.length > 0 && <p>Likes: {likes.length}</p>}
       </div>
     </div>
   );
