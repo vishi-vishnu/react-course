@@ -67,29 +67,7 @@ body {
   background-color: #d35400;
 }
 
-/* .signin-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 50px auto;
-  padding: 30px;
-  background: #7b68ee;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.signin-container .signin-btn{
-  background-color: rgb(145, 145, 187);
-  border: none;
-  padding: 15px;
-  font-size: 15px;
-  font-weight: 400;
-  border-radius: 8px;
-  cursor: pointer;
-  color: black;
-} */
-
-/* Container for the sign-in box */
+/* Sign-in Container Styles */
 .signin-container {
   display: flex;
   flex-direction: column;
@@ -98,7 +76,7 @@ body {
   width: 90%;
   max-width: 400px;
   padding: 30px;
-  margin: auto; /* Centers the container horizontally */
+  margin: auto;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -109,7 +87,6 @@ body {
   text-align: center;
 }
 
-/* Button styling */
 .signin-container .signin-btn {
   background-color: #8e44ad;
   border: none;
@@ -127,7 +104,6 @@ body {
   background-color: #732d91;
 }
 
-/* Heading styling */
 .signin-container .signin-heading {
   font-size: 18px;
   font-weight: 600;
@@ -135,7 +111,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .signin-container {
     width: 80%;
@@ -166,72 +141,60 @@ body {
   }
 }
 
-/* end of sign in  */
-
-.signin-container .signin-heading {
-  font-size: 14px;
-}
-
-.signin-container .signin-btn {
-  font-size: 12px;
-  padding: 10px 12px;
-}
-
-/* Post Container Styles */
+/* Post Styles */
 .post-container {
-  max-width: 800px;
+  max-width: 600px;
   width: 90%;
-  margin: 20px auto;
+  margin: 30px auto;
   padding: 20px;
-  background: #fcf8f8;
-  border-radius: 25px;
+  background: white;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .post-container:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.post-title {
-  font-size: 20px;
-  font-weight: 600;
+.post-container .title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
   margin-bottom: 10px;
-  color: #464545;
 }
 
-.post-body {
-  font-size: 19px;
-  color: #4d4b4b;
+.post-container .body {
+  font-size: 16px;
+  color: #666;
   margin-bottom: 20px;
 }
 
-.post-footer {
+.post-container .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 16px;
-  color: #858181;
+  font-size: 14px;
+  color: #757575;
 }
 
-.post-footer p {
+.post-container .footer p {
   margin: 0;
 }
 
-.post-footer button {
+.post-container .footer button {
   background-color: #2544d1;
-  color: #ffffff;
-  padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  padding: 6px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
-.post-footer button:hover {
-  background-color: #1e3a9b;
-  transform: scale(1.05);
+.post-container .footer button:hover {
+  color: #007bff;
+  
 }
 
 /* Form Styles */
