@@ -1,121 +1,301 @@
-.App {
-  text-align: center;
-}
-/* Basic styles for the App */
+/* App.css */
+
+/* General Styles */
 body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4f7fc;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #ff7e5f, #aa9c91);
-  height: 100vh;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #2544d1;
+  padding: 18px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.links a {
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 4px;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #f39c12;
+}
+
+.user {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.App {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  width: 400px;
-  max-width: 90%;
+.user p {
+  color: #ffffff;
+  margin: 0 10px;
+  font-size: 16px;
 }
 
-.addTask {
+.user img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user button {
+  background-color: #f39c12;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user button:hover {
+  background-color: #d35400;
+}
+
+/* Sign-in Container Styles */
+.signin-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 400px;
+  padding: 30px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  border-radius: 20px;
+  box-shadow: 10px 14px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signin-container .signin-btn {
+  background-color: #8e44ad;
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.signin-container .signin-btn:hover {
+  background-color: #732d91;
+}
+
+.signin-container .signin-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
   margin-bottom: 20px;
 }
 
-.addTask input {
-  padding: 10px;
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+@media (max-width: 768px) {
+  .signin-container {
+    width: 80%;
+  }
+
+  .signin-container .signin-heading {
+    font-size: 16px;
+  }
+
+  .signin-container .signin-btn {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-container {
+    width: 90%;
+  }
+
+  .signin-container .signin-heading {
+    font-size: 14px;
+  }
+
+  .signin-container .signin-btn {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+}
+
+/* Post Styles */
+.post-container {
+  max-width: 600px;
+  width: 90%;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.post-container:hover {
+  transform: translateY(-5px);
+}
+
+.post-container .title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.post-container .body {
   font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s;
+  color: #666;
+  margin-bottom: 20px;
 }
 
-.addTask input:focus {
-  border-color: #007bff;
-}
-
-.addTask button {
-  padding: 10px 20px;
-  margin-left: 10px;
-  border: none;
-  background-color: #28a745;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.addTask button:hover {
-  background-color: #218838;
-  transform: scale(1.05);
-}
-
-.list {
-  width: 100%;
-}
-
-.task {
+.post-container .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.task:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.task h1 {
-  font-size: 18px;
-  margin: 0;
-  flex: 1;
-}
-
-.task button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s, transform 0.3s;
+  color: #757575;
 }
 
-.task button:first-of-type {
-  background-color: #007bff;
-  color: white;
-  margin-right: 5px;
+.post-container .footer p {
+  margin: 0;
 }
 
-.task button:first-of-type:hover {
-  background-color: #0056b3;
-  transform: scale(1.1);
+.post-container .footer button {
+  background-color: #2544d1;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
-.task button:last-of-type {
-  background-color: #dc3545;
-  color: white;
+.post-container .footer button:hover {
+  color: #007bff;
+  
 }
 
-.task button:last-of-type:hover {
-  background-color: #c82333;
-  transform: scale(1.1);
+/* Form Styles */
+form {
+  max-width: 400px;
+  width: 100%;
+  margin: 50px auto;
+  padding: 30px;
+  background: #7b68ee;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
+.input-container {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: 80%;
+  padding: 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background: #dcd6f7;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  background: #f0f8ff;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: -10px;
+  text-align: left;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.formSubmit {
+  background-color: #dcd6f7;
+  color: #333;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  margin-top: 20px;
+}
+
+.formSubmit:hover {
+  background-color: #c1b8e6;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+.formSubmit:active {
+  transform: translateY(2px);
+}
+
+input[placeholder="Title..."]::placeholder,
+textarea[placeholder="Description..."]::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+input[type="text"],
+textarea {
+  background: #dcd6f7;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  background: #f0f8ff;
+}
 
 .App-logo {
   height: 40vmin;
@@ -150,8 +330,4 @@ body {
   to {
     transform: rotate(360deg);
   }
-}
-
-.User {
-  color: red;
 }
